@@ -1,0 +1,65 @@
+===================
+Directory Contents
+===================
+
+List of HMS target boiling study runs
+----------------------------------------------------
+hms_Al.dat
+hms_C12.dat
+hms_LH2.dat
+hms_LD2.dat
+
+
+
+
+run_boiling.C  :  main target boiling analysis code which reads
+                  raw ROOTfiles and produces an output summary file
+		  with the relevant information
+
+
+
+Output Summary Files with the normalized yield
+(and other relevant info)
+----------------------------------------------------
+hms_Al_yield.data
+hms_C12_yield.data
+hms_LH2_yield.data
+hms_LD2_yield.data
+
+
+make_plot.py   :  python code that reads in the output summary files
+                  and makes the relevant plots.
+
+
+
+
+-------------------------------------------------------------
+#  This info below can be found in each of the summary files.
+#
+#  NOTE: ALL VARIABLES HAVE A BCM CURRENT CUT OF +/- 3 uA about the set current
+#  Relevant Headers:
+#
+#  set_current:    central beam current [uA]
+#
+#  avg_current_bcm4a (or b):  average beam current
+#  (calculated using a beam current cut of +/- 3 uA about the set_current) 
+#
+#  Qtot_bcm4a : BCM4A total charge [mC]
+#
+#  sclY4a, sclY_err4a: scaler normalized yield for bcm4a (same applied for BCM4B)
+#  --> scaler yield was calculated by counting EDTM-subtracted htrig2 scalers and dividing by the total charge
+#
+#  ntrkY4a, ntrkY_err4a: non-tracking normalized yield for bcm4a (same applies for BCM4B)
+#  --> non-tracking yield was calculated by integrating over HMS calorimeter variable H.cal.etotnorm with cuts: hcer_npeSum>0.7 && hcal_etotnorm>0.7
+#  --> the yield was then divided by: total bcm4a charge (Qtot_bcm4a) and computer live time (cpuLT_bcm4a)
+#  
+#  trkY4a, trkY_err4a: tracking normalized yield for bcm4a  (same applies for BCM4B)
+#  --> tracking yield was calculated by integrating over HMS delta (H.gtr.dp) with cuts: h_calEtotTrackNorm > 0.7 && abs(h_delta) < 8.0
+#  --> the yield was then divided by: total bcm4a charge (Qtot_bcm4a), computer live time (cpuLT_bcm4a) and electron tracking efficiency (h_eTrkEff_bcm4a)
+#
+#  electron tracking effifiency definition:  
+#  good_elec_should = hGoodScinHit==1.&&hBetanotrk>0.85&&hBetanotrk<1.5&&hCAL_etotnorm>0.6&&hCER_npeSum>0.7;
+#  good_elec_did = good_elec_should&&hdc_ntrack>0.;
+#
+#  ALL ABOVE-MENTIONED HISTOGRAMS WHERE INTEGRATED FOR ALL EVENTS THAT ACTUALLY PASSED THE BCM CUT
+#

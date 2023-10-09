@@ -1,0 +1,30 @@
+#  HMS Al DUMMY Target Boiling Summary File
+#  NOTE: ALL VARIABLES HAVE A BCM CURRENT CUT OF +/- 3 uA about the set current
+#  Relevant Headers:
+#
+#  set_current:    central beam current [uA]
+#
+#  avg_current_bcm4a (or b):  average beam current
+#  (calculated using a beam current cut of +/- 3 uA about the set_current) 
+#
+#  Qtot_bcm4a : BCM4A total charge [mC]
+#
+#  sclY4a, sclY_err4a: scaler normalized yield for bcm4a (same applied for BCM4B)
+#  --> scaler yield was calculated by counting EDTM-subtracted htrig2 scalers and dividing by the total charge
+#
+#  ntrkY4a, ntrkY_err4a: non-tracking normalized yield for bcm4a (same applies for BCM4B)
+#  --> non-tracking yield was calculated by integrating over HMS calorimeter variable H.cal.etotnorm with cuts: hcer_npeSum>0.7 && hcal_etotnorm>0.7
+#  --> the yield was then divided by: total bcm4a charge (Qtot_bcm4a) and computer live time (cpuLT_bcm4a)
+#  
+#  trkY4a, trkY_err4a: tracking normalized yield for bcm4a  (same applies for BCM4B)
+#  --> tracking yield was calculated by integrating over HMS delta (H.gtr.dp) with cuts: h_calEtotTrackNorm > 0.7 && abs(h_delta) < 8.0
+#  --> the yield was then divided by: total bcm4a charge (Qtot_bcm4a), computer live time (cpuLT_bcm4a) and electron tracking efficiency (h_eTrkEff_bcm4a)
+#
+#  electron tracking effifiency definition:  
+#  good_elec_should = hGoodScinHit==1.&&hBetanotrk>0.85&&hBetanotrk<1.5&&hCAL_etotnorm>0.6&&hCER_npeSum>0.7;
+#  good_elec_did = good_elec_should&&hdc_ntrack>0.;
+#
+#  ALL ABOVE-MENTIONED HISTOGRAMS WHERE INTEGRATED FOR ALL EVENTS THAT ACTUALLY PASSED THE BCM CUT
+#
+#!Run[i,0]/    set_current[f,1]/   avg_current_bcm4a[f,2]/     sclY4a[f,3]/     sclY_err4a[f,4]/    ntrkY4a[f,5]/    ntrkY_err4a[f,6]/    trkY4a[f,7]/    trkY_err4a[f,8]/    cpuLT_bcm4a[f,9]/     tLT_bcm4a[f,10]/    Qtot_bcm4a[f,11]/    htrig1_rate_bcm4a[f,12]/     htrig2_rate_bcm4a[f,13]/     htrig3_rate_bcm4a[f,14]/    hedtm_rate_bcm4a[f,15]/   h_eTrkEff_bcm4a[f,16]/      avg_current_bcm4b[f,17]/     sclY4b[f,18]/     sclY_err4b[f,19]/    ntrkY4b[f,20]/    ntrkY_err4b[f,21]/    trkY4b[f,22]/    trkY_err4b[f,23]/    cpuLT_bcm4b[f,24]/     tLT_bcm4b[f,25]/    Qtot_bcm4b[f,26]/    htrig1_rate_bcm4b[f,27]/     htrig2_rate_bcm4b[f,28]/     htrig3_rate_bcm4b[f,29]/    hedtm_rate_bcm4b[f,30]/   h_eTrkEff_bcm4b[f,31]/
+2096     40.000000     39.965930     1502.636698     7.577959     683.500822     5.010324     529.415951     4.425342     0.991037     0.988361    27.473707    157.270247     63.053859     35.819014    2.999586    0.992878    39.899140     1505.152074     7.590644     684.644984     5.018712     530.302179     4.432750     0.991037     0.988361    27.427793    157.270247     63.053859     35.819014    2.999586    0.992878

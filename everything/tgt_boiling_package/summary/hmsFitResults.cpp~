@@ -1,0 +1,60 @@
+void hmsFitResults(){
+ gStyle->SetTitleX(0.2);
+ gStyle->SetTitleW(.6);
+ gStyle->SetOptStat(1111);
+ gStyle->SetOptFit(1);
+ gStyle->SetLabelSize(0.00,"x");// size of axis value font
+  const int pts=3;
+  double lh2[pts]={3.47, 3.747, 3.438};
+  double lh2e[pts]={0.6289, 0.5527, 0.5261};
+  double ld2[pts]={4.099, 4.176, 4.059};
+  double ld2e[pts]={0.7084, 0.6241, 0.5771};
+  double x[pts]={1,2,3};
+
+
+  TGraphErrors *gh=new TGraphErrors(pts,&x[0],&lh2[0],0,&lh2e[0]);
+  TGraphErrors *gd=new TGraphErrors(pts,&x[0],&ld2[0],0,&ld2e[0]);
+
+  gh->SetTitle("Boiling Slopes Summary With Dummy Subtraction");
+  gh->GetYaxis()->SetRangeUser(2.5,6);
+  gh->GetYaxis()->SetTitle("Boiling Slope ( %/ 100 uA)");
+  gh->GetXaxis()->SetTitle( "Tracking Yield                  Non Tracking Yield                  Scaler Yield  ");
+  gh->SetMarkerColor(kRed);
+  gh->SetMarkerStyle(33);
+
+  gd->SetMarkerColor(kBlue);
+  gd->SetMarkerStyle(20);
+
+  gh->Draw("ap");
+  gd->Draw("sp");
+
+  gh->Fit("pol0");
+  gd->Fit("pol0");
+
+  TLegend *leg=new TLegend(.65,.7,.85,.85);
+  leg->AddEntry(gh,"LH2","lp");
+  leg->AddEntry(gd,"LD2","lp");
+  leg->Draw();
+  gPad->Update();
+  TF1 *fh=(TF1*)gh->GetListOfFunctions()->FindObject("pol0");
+  fh->SetLineColor(kRed);
+
+  TF1 *fd=(TF1*)gd->GetListOfFunctions()->FindObject("pol0");
+  fd->SetLineColor(kBlue);
+
+  TPaveStats *statsh = (TPaveStats*)gh->FindObject("stats");  
+  statsh->SetTextColor(kRed);
+    statsh->SetY1NDC(.68);
+    statsh->SetX1NDC(.13);
+    statsh->SetY2NDC(.82);
+    statsh->SetX2NDC(.3);
+    statsh->Draw("same");
+  TPaveStats *statsd = (TPaveStats*)gd->FindObject("stats");  
+  statsd->SetTextColor(kBlue);
+    statsd->SetY1NDC(.68);
+    statsd->SetX1NDC(.32);
+    statsd->SetY2NDC(.82);
+    statsd->SetX2NDC(.49);
+    statsd->Draw("same");
+  return;
+}

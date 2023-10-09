@@ -1,0 +1,27 @@
+#include "plotAllSlopes.cpp"
+
+void plotSummary(){
+  string fname;
+  cout << "Entername"<<endl;
+  cin >> fname;
+  TCanvas *c1=new TCanvas();
+  c1->Divide(3,2);
+  c1->cd(1);
+  plotAllSlopes("LH2","SHMS");
+  c1->cd(2);
+  plotAllSlopes("LD2","SHMS");
+  c1->cd(3);
+  plotAllSlopes("C12", "SHMS");
+
+  c1->cd(4);
+  plotAllSlopes("LH2","HMS");
+  c1->cd(5);
+  plotAllSlopes("LD2","HMS");
+  c1->cd(6);
+  plotAllSlopes("C12", "HMS");
+  TPaveText *tex=new TPaveText(.3,.7,.7,.85,"NDC");
+  tex->AddText("HELLO");
+  tex->Draw("same");
+  c1->SaveAs(Form("%s.pdf",fname.c_str()));
+  return;
+}
